@@ -44,8 +44,13 @@ public class Reader {
             int count = 0;
             while (line != null)
             {
+                if (line.equals(""))
+                {
+                    line = in.readLine();
+                    continue;
+                }
                 count++;
-                if (true)
+                if (count % 2 != 0)
                 {
                     //Dictionary dict = new Dictionary(line);
                     //this.dict.add(dict);
