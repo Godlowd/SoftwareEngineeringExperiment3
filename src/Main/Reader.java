@@ -1,5 +1,6 @@
 package Main;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.HashSet;
@@ -42,7 +43,7 @@ public class Reader {
             BufferedReader in = new BufferedReader(reader);
             String line = in.readLine();
             //count the lines
-            int count = 0;
+            int count = 1;
             while (line != null)
             {
                 //if the line is just blank,then skip it
@@ -51,17 +52,23 @@ public class Reader {
                     line = in.readLine();
                     continue;
                 }
-                count++;
-                if (count % 2 != 0)
-                {
-                    //initialize a dict object to store the word we get
-                    Dictionary dict = new Dictionary(line);
-                    //read the next line to get other info
-                    line = in.readLine();
-                    String pronunciation = getPronunciation(line);
-                    dict.setPronunciation(pronunciation);
-                    System.out.println(pronunciation);
-                }
+
+                    count++;
+
+                //initialize a dict object to store the word we get
+                Dictionary dict = new Dictionary(line);
+
+                    System.out.println(dict.name);
+                //read the next line to get other info
+                line = in.readLine();
+                //get and set the pronuciation of the new word
+                String pronunciation = getPronunciation(line);
+                dict.setPronunciation(pronunciation);
+                //get and set the property of the word
+//              String property = getProperty(line);
+//              ict.setProperty(property);
+                line = in.readLine();
+
 
             }
             return this.dict;
@@ -75,7 +82,7 @@ public class Reader {
     public String getPronunciation(String line){
         if (line.equals(""))
             return "";
-        else {
+        else {    
             if(line.charAt(0)=='/'){
                 int i = 1;
                 while(line.charAt(i)!='/')
@@ -84,6 +91,22 @@ public class Reader {
             }
             else
                 return "";
+        }
+    }
+
+    public void getProperty(String line)
+    {
+        if(line.equals("")) return ;
+
+        //#define the index of the letter in the String
+        int i = 0;
+        if(line.charAt(0) == '/')
+        {
+            while (line.charAt(++i) != '/')
+                ;
+        }
+        else{
+
         }
     }
 }
