@@ -44,6 +44,7 @@ public class Reader {
             int count = 0;
             while (line != null)
             {
+                //if the line is just blank,then skip it
                 if (line.equals(""))
                 {
                     line = in.readLine();
@@ -52,11 +53,14 @@ public class Reader {
                 count++;
                 if (count % 2 != 0)
                 {
-                    //Dictionary dict = new Dictionary(line);
+                    //initialize a dict object to store the word we get
+                    Dictionary dict = new Dictionary(line);
+                    //read the next line to get other info
+                    line = in.readLine();
                     //this.dict.add(dict);
                     System.out.println(line);
                 }
-                line = in.readLine();
+
             }
             return this.dict;
         }
@@ -66,4 +70,15 @@ public class Reader {
         }
     }
 
+    public String getPronunciation(String line){
+        if(line.charAt(0)=='/'){
+            int i = 1;
+            while(line.charAt(i)!='/')
+                i++;
+            return line.substring(0, ++i);
+        }
+        else
+            return "";
+
+    }
 }
