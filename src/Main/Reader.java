@@ -52,21 +52,17 @@ public class Reader {
                     line = in.readLine();
                     continue;
                 }
-
-                    count++;
-
                 //initialize a dict object to store the word we get
                 Dictionary dict = new Dictionary(line);
-
-                    System.out.println(dict.name);
                 //read the next line to get other info
                 line = in.readLine();
                 //get and set the pronuciation of the new word
                 String pronunciation = getPronunciation(line);
                 dict.setPronunciation(pronunciation);
                 //get and set the property of the word
-//              String property = getProperty(line);
-//              ict.setProperty(property);
+                String property = getProperty(line);
+                dict.setProperty(property);
+                System.out.println(dict.name + " " + dict.getPronunciation() + " " + dict.getProperty());
                 line = in.readLine();
 
 
@@ -94,9 +90,9 @@ public class Reader {
         }
     }
 
-    public void getProperty(String line)
+    public String getProperty(String line)
     {
-        if(line.equals("")) return ;
+        if(line.equals("")) return "";
 
         //#define the index of the letter in the String
         int i = 0;
@@ -104,9 +100,43 @@ public class Reader {
         {
             while (line.charAt(++i) != '/')
                 ;
+            i = i+2;
+            if (line.substring(i,i+1).equals("n") && (line.substring(i+1,i+2).equals(" ") || line.substring(i+1,i+2).equals(".")))
+                return "n";
+            else if (line.substring(i,i+1).equals("v") && (line.substring(i+1,i+2).equals(" ") || line.substring(i+1,i+2).equals(".")))
+                return "v";
+            else if (line.substring(i,i+3).equals("adj") && (line.substring(i+3,i+4).equals(" ") || line.substring(i+3,i+4).equals(".")))
+                return "adj";
+            else if (line.substring(i,i+3).equals("adv") && (line.substring(i+3,i+4).equals(" ") || line.substring(i+3,i+4).equals(".")))
+                return "adv";
+            else if (line.substring(i,i+4).equals("abbr") && (line.substring(i+4,i+5).equals(" ") || line.substring(i+4,i+5).equals(".")))
+                return "abbr";
+            else if (line.substring(i,i+4).equals("pref") && (line.substring(i+4,i+5).equals(" ") || line.substring(i+4,i+5).equals(".")))
+                return "pref";
+            else if (line.substring(i,i+4).equals("suff") && (line.substring(i+4,i+5).equals(" ") || line.substring(i+4,i+5).equals(".")))
+                return "suff";
+            else if (line.substring(i,i+4).equals("symb") && (line.substring(i+4,i+5).equals(" ") || line.substring(i+4,i+5).equals(".")))
+                return "symb";
+            else return "";
         }
         else{
-
+            if (line.substring(0,1).equals("n"))
+                return "n";
+            else if (line.substring(0,1).equals("v"))
+                return "v";
+            else if (line.substring(0,3).equals("adj"))
+                return "adj";
+            else if (line.substring(0,3).equals("adv"))
+                return "adv";
+            else if (line.substring(0,4).equals("abbr"))
+                return "abbr";
+            else if (line.substring(0,4).equals("pref"))
+                return "pref";
+            else if (line.substring(0,4).equals("suff"))
+                return "suff";
+            else if (line.substring(0,4).equals("symb"))
+                return "symb";
+            else return "";
         }
     }
 }
