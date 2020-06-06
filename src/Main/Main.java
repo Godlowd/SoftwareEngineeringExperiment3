@@ -25,25 +25,49 @@ public class Main {
         System.out.println("if you want to quit, please press the q");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        if(input.equals("1"))
-            System.out.println("yes");
-        else System.out.println("no");
 //        while(input.equals("1") ||input.equals("2") || input.equals("q"))
 //            ;
         switch (input)
         {
             case "1": search(dict);
             break;
-            case "2": add();
+            case "2": add(dict);
             break;
-            case "q": System.exit(0);
+            case "q": {
+                System.out.println("Program exit");
+                System.exit(0);
+            }
+            break;
         }
 
 
     }
-    public static void add()
+    public static void add(HashMap<String, Dictionary> dict)
     {
         System.out.println("这是添加方法");
+        System.out.println("Please input the word you want to add: ");
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        Dictionary newword = new Dictionary(input);
+        //set new word's pronunciation
+        System.out.println("Please input its pronunciation: ");
+        input = sc.nextLine();
+        newword.setPronunciation(input);
+        //set new word's property
+        System.out.println("Please input its property: ");
+        input = sc.nextLine();
+        newword.setProperty(input);
+        //set new word's example
+        System.out.println("Please input its example: ");
+        input = sc.nextLine();
+        newword.setExample(input);
+        //add the word to the dictionary
+        dict.put(newword.getName(), newword);
+        //output the word's info
+        System.out.println("word: " + newword.getName());
+        System.out.println("pronunciation: " + newword.getPronunciation());
+        System.out.println("property: " + newword.getProperty());
+        System.out.println("example: " + newword.getExample());
     }
 
     public static void search(HashMap<String, Dictionary> dict)
@@ -52,7 +76,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Set<String> names = dict.keySet();
-        System.out.println(names.size());
         if (names.contains(input))
         {
             System.out.println("查询的单词为: " + input);
