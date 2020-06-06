@@ -6,7 +6,6 @@ import java.util.*;
 public class Main {
     public static void main(String args[]) throws IOException {
         initial();
-
         //String path = "src/Main/test.txt";
         String path = "src/Main/ox-edict-utf8.txt";
         Reader rd = new Reader(path);
@@ -19,32 +18,31 @@ public class Main {
         Reader rd = new Reader(path);
         HashMap<String, Dictionary> dict = new HashMap<String, Dictionary>();
         dict = rd.ReadFile();
-        System.out.println("What do you want to do?");
-        System.out.println("1. search word");
-        System.out.println("2. add word to the dictionanry");
-        System.out.println("if you want to quit, please press the q");
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-//        while(input.equals("1") ||input.equals("2") || input.equals("q"))
-//            ;
-        switch (input)
+        while (true)
         {
-            case "1": search(dict);
-            break;
-            case "2": add(dict);
-            break;
-            case "q": {
-                System.out.println("Program exit");
-                System.exit(0);
+            System.out.println("What do you want to do?");
+            System.out.println("1. search word");
+            System.out.println("2. add word to the dictionanry");
+            System.out.println("if you want to quit, please press the q");
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
+            switch (input)
+            {
+                case "1": search(dict);
+                    break;
+                case "2": add(dict);
+                    break;
+                case "q": {
+                    System.out.println("Program exit");
+                    System.exit(0);
+                }
+                break;
+                default: continue;
             }
-            break;
         }
-
-
     }
     public static void add(HashMap<String, Dictionary> dict)
     {
-        System.out.println("这是添加方法");
         System.out.println("Please input the word you want to add: ");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -69,7 +67,6 @@ public class Main {
         System.out.println("property: " + newword.getProperty());
         System.out.println("example: " + newword.getExample());
     }
-
     public static void search(HashMap<String, Dictionary> dict)
     {
         System.out.print("Please input the word that you want to search: ");
@@ -101,7 +98,6 @@ public class Main {
             System.out.println("test passes");
         else System.out.println("test fails");
     }
-
     public static void testgetExample()
     {
         String path = "src/Main/ox-edict-utf8.txt";
