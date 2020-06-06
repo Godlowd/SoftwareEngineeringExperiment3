@@ -10,7 +10,7 @@ public class Dictionary {
     //the first letter of the word
     public String alphabet;
     //the example sentences of the word
-    public ArrayList<String> example;
+    public String example;
     //the property of the word, such as n, adv, adj ,etc.
     public String property;
 
@@ -19,7 +19,7 @@ public class Dictionary {
         this.pronunciation = "";
         this.alphabet = "";
         this.property = "";
-        this.example = new ArrayList<String>();
+        this.example = "";
     }
 
     public String getName() {
@@ -46,11 +46,11 @@ public class Dictionary {
         this.alphabet = alphabet;
     }
 
-    public ArrayList<String> getExample() {
+    public String getExample() {
         return example;
     }
 
-    public void setExample(ArrayList<String> example) {
+    public void setExample(String example) {
         this.example = example;
     }
 
