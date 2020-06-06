@@ -3,6 +3,7 @@ package Main;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Reader {
@@ -11,12 +12,12 @@ public class Reader {
     //the path to read the file
     public String FilePath;
     //the set to store the words we read from the dictionary
-    public HashSet<Dictionary> dict;
+    public HashMap<String, Dictionary> dictionary;
 
     public Reader(String FilePath)
     {
         this.FilePath = FilePath;
-        this.dict = new HashSet<Dictionary>();
+        this.dictionary = new HashMap<String, Dictionary>();
     }
 
     public String getFilePath() {
@@ -27,25 +28,27 @@ public class Reader {
         FilePath = filePath;
     }
 
-    public HashSet<Dictionary> getDict() {
-        return dict;
+    public HashMap<String, Dictionary> getDict() {
+        return dictionary;
     }
 
-    public void setDict(HashSet<Dictionary> dict) {
-        this.dict = dict;
+    public void setDict(HashMap<String, Dictionary> dict) {
+        this.dictionary = dict;
     }
 
-    public HashSet<Dictionary> ReadFile() throws IOException {
+    public HashMap<String, Dictionary> ReadFile() throws IOException {
         File file = new File(this.FilePath);
         if(file.isFile() && file.exists())
         {
             InputStreamReader reader = new InputStreamReader(new FileInputStream(FilePath));
             BufferedReader in = new BufferedReader(reader);
             String line = in.readLine();
+
             //count the lines
             int count = 1;
             while (line != null)
             {
+                String name = line;
                 //if the line is just blank,then skip it
                 if (line.equals(""))
                 {
@@ -53,7 +56,7 @@ public class Reader {
                     continue;
                 }
                 //initialize a dict object to store the word we get
-                Dictionary dict = new Dictionary(line);
+                Dictionary dict = new Dictionary(name);
                 //get the first letter of the word
                 dict.setAlphabet(line.substring(0,1).toUpperCase());
                 //read the next line to get other info
@@ -66,12 +69,13 @@ public class Reader {
                 dict.setProperty(property);
 //                String example = getExample(dict);
 //                dict.setExample(example);
-                System.out.println("单词名: " + dict.name + " " + "发音: " + dict.getPronunciation() + " " + "词性 " + dict.getProperty() + " " + "例句: " + dict.getExample());
+                //System.out.println("单词名: " + dict.name + " " + "发音: " + dict.getPronunciation() + " " + "词性 " + dict.getProperty() + " " + "例句: " + dict.getExample());
+                dictionary.put(name, dict);
                 line = in.readLine();
 
 
             }
-            return this.dict;
+            return this.dictionary;
         }
         else{
             System.out.println("The file doesn't exist! Please check the file path");
