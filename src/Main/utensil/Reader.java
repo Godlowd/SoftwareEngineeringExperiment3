@@ -62,16 +62,16 @@ public class Reader {
                 //get and set the pronuciation of the new word
                 String pronunciation = getPronunciation(line);
                 dict.setPronunciation(pronunciation);
+                String property = getProperty(line, dict);;
                 //catch the exception if the speech of the word is illegal
                 try {
                     //get and set the property of the word
-                    String property = getProperty(line, dict);
                     speech = Speech.valueOf(property);
                     dict.setProperty(speech);
                 }
                 catch (IllegalArgumentException e)
                 {
-                    System.out.println("There are illegal speech in the dictionary,please check it");
+                    dict.setProperty(Speech.unknown);
                 }
                 dictionary.put(name, dict);
                 line = in.readLine();
