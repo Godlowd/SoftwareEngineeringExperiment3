@@ -1,16 +1,15 @@
-package Test;
+package Main.Test;
 
-import Main.Dictionary;
-import Main.Reader;
+import Main.utensil.Dictionary;
+import Main.utensil.Reader;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class ReaderTester {
     public static void main(String args[]) throws IOException {
-        String path  = "src/Test/test.txt";
+        String path  = "src/Main/Main.Test/test.txt";
         //read from sepcific path
         Reader rd = new Reader(path);
         //create a hashmap to restore the result

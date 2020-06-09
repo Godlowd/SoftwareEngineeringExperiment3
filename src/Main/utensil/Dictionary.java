@@ -1,7 +1,5 @@
-package Main;
-
-import java.util.ArrayList;
-
+package Main.utensil;
+import Main.Speech;
 public class Dictionary {
     //the word be searched
     public String name;
@@ -12,13 +10,13 @@ public class Dictionary {
     //the example sentences of the word
     public String example;
     //the property of the word, such as n, adv, adj ,etc.
-    public String property;
+    public Speech property;
 
     public Dictionary(String name){
         this.name = name;
         this.pronunciation = "";
         this.alphabet = "";
-        this.property = "";
+        this.property = Speech.unknown;
         this.example = "";
     }
 
@@ -54,11 +52,13 @@ public class Dictionary {
         this.example = example;
     }
 
-    public String getProperty() {
+    public Speech getProperty() {
         return property;
     }
 
-    public void setProperty(String property) {
+    public void setProperty(Speech property) {
         this.property = property;
     }
 }
+
+

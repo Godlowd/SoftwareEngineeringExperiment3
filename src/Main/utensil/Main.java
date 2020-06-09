@@ -1,7 +1,8 @@
-package Main;
+package Main.utensil;
 
 import java.io.*;
 import java.util.*;
+import Main.Speech;
 
 public class Main {
     public static void main(String args[]) throws IOException {
@@ -41,7 +42,7 @@ public class Main {
             }
         }
     }
-    public static void add(HashMap<String, Dictionary> dict)
+    public static void add(HashMap<String, Dictionary> dict) throws IllegalArgumentException
     {
         System.out.println("Please input the word you want to add: ");
         Scanner sc = new Scanner(System.in);
@@ -54,7 +55,15 @@ public class Main {
         //set new word's property
         System.out.println("Please input its property: ");
         input = sc.nextLine();
-        newword.setProperty(input);
+        try{
+            Speech speech = Speech.valueOf(input);
+            newword.setProperty(speech);
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println("The speech you input is illegal");
+            return;
+        }
         //set new word's example
         System.out.println("Please input its example: ");
         input = sc.nextLine();

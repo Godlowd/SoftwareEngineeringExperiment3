@@ -1,19 +1,17 @@
-package Main;
+package Main.utensil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import Main.Speech;
 
 public class Reader {
-
-
     //the path to read the file
     public String FilePath;
     //the set to store the words we read from the dictionary
     public HashMap<String, Dictionary> dictionary;
-
     public Reader(String FilePath)
     {
         this.FilePath = FilePath;
@@ -36,14 +34,14 @@ public class Reader {
         this.dictionary = dict;
     }
 
-    public HashMap<String, Dictionary> ReadFile() throws IOException {
+    public HashMap<String, Dictionary> ReadFile() throws IOException,IllegalArgumentException {
         File file = new File(this.FilePath);
         if(file.isFile() && file.exists())
         {
             InputStreamReader reader = new InputStreamReader(new FileInputStream(FilePath));
             BufferedReader in = new BufferedReader(reader);
             String line = in.readLine();
-
+            Speech speech;
             //count the lines
             int count = 1;
             while (line != null)
@@ -64,16 +62,19 @@ public class Reader {
                 //get and set the pronuciation of the new word
                 String pronunciation = getPronunciation(line);
                 dict.setPronunciation(pronunciation);
-                //get and set the property of the word
-                String property = getProperty(line,dict);
-                dict.setProperty(property);
-//                String example = getExample(dict);
-//                dict.setExample(example);
-                //System.out.println("单词名: " + dict.name + " " + "发音: " + dict.getPronunciation() + " " + "词性 " + dict.getProperty() + " " + "例句: " + dict.getExample());
+                //catch the exception if the speech of the word is illegal
+                try {
+                    //get and set the property of the word
+                    String property = getProperty(line, dict);
+                    speech = Speech.valueOf(property);
+                    dict.setProperty(speech);
+                }
+                catch (IllegalArgumentException e)
+                {
+                    System.out.println("There are illegal speech in the dictionary,please check it");
+                }
                 dictionary.put(name, dict);
                 line = in.readLine();
-
-
             }
             return this.dictionary;
         }
