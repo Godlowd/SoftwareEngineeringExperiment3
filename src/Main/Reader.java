@@ -100,7 +100,7 @@ public class Reader {
 
     public String getProperty(String line, Dictionary dict)
     {
-        if(line.equals("")) return "";
+        if(line.equals("") || line.equals(".")) return "";
 
         //#define the index of the letter in the String
         int i = 0;
